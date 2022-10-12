@@ -1,0 +1,52 @@
+/*  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
+.price1_bl, .setting1_bl, .info1_bl{
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-top: 0;
+	transition: .3s;
+   visibility: hidden;
+	opacity: 0;
+   overflow: hidden;
+}
+.price1_bl_act, .setting1_bl_act, .info1_bl_act{
+	padding-top: 10px;
+	height: 195px;
+	opacity: 1;
+   visibility: visible;
+   overflow: unset;
+}
+.info1_bl_act{height:298px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */

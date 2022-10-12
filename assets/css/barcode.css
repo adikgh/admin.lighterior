@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap');
+
+
+
+
+.barcode_128{
+   font-family: 'Libre Barcode 128 Text', cursive;
+   font-size: 60px;
+}
+
+
+
+.mp_dspn{display: none !important;}
+
+html, body{
+   background: var(--tr);
+}
+.app{
+   padding: 0;
+   margin: 0;
+   height: auto;
+   min-height: 0;
+}
+
+
+@media print {
+   .ub1_l{
+      display: none;
+   }
+}
+
+
+
+.print{
+   position: relative;
+   width: 100%;
+   height: calc(100vh - 65px);
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+}
+@media print {
+   .print {
+     height: auto;
+   }
+}
+
+.print_l{
+   position: relative;
+   width: 40%;
+   height: 100%;
+   border-right: 1px solid var(--gr5);
+   padding: 40px;
+}
+@media print {
+   .print_l {
+     display: none;
+   }
+}
+
+
+.f{
+   position: relative;
+   width: 100%;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+.fi{
+   width: auto;
+   height: 44px;
+   padding: 0 14px;
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   background: var(--wh);
+   border: 1px solid var(--gr2);
+   border-left: 0;
+   font-size: 14px;
+   transition: .3s;
+   cursor: pointer;
+}
+.fi:first-child{
+   border-top-left-radius: 8px;
+   border-bottom-left-radius: 8px;
+   border-left: 1px solid var(--gr2);
+}
+.fi:last-child{
+   border-top-right-radius: 8px;
+   border-bottom-right-radius: 8px;
+}
+.fi:hover{
+   background: var(--gr2);
+}
+.fi_act, .fi_act:hover{
+   background: var(--cl2);
+   /* color: var(--wh); */
+}
+
+
+
+
+
+
+
+
+
+.print_r{
+   position: relative;
+   width: 60%;
+   height: 100%;
+   padding-top: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+@media print {
+   .print_r {
+      width: 100%;
+      align-items: flex-start;
+      height: auto;
+      padding-top: 0;
+   }
+}
+
+.print_bl{
+   position: relative;
+   border: 1px solid var(--bl);
+   transition: .3s;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 10px;
+}
+@media print {
+   .print_bl {
+      border: 0;
+      padding: 0;
+   }
+}
+
+.print_bl_c{
+   position: relative;
+   width: 100%;
+   height: 100%;
+   transform: scale(1);
+   transition: .3s;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   flex-direction: column;
+}
+
+.print_bl_code{
+   font-size: 40px;
+   transition: .3s;
+}
+.print_bl_name{
+   position: relative;
+   width: 100%;
+   overflow: hidden;
+   transition: .3s;
+   margin-bottom: 20px;
+   font-size: 16px;
+}
+.print_bl_price{
+   position: relative;
+   width: 100%;
+   overflow: hidden;
+   margin-top: 20px;
+   font-size: 20px;
+   transition: .3s;
+}

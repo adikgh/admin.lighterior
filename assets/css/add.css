@@ -1,0 +1,31 @@
+/*  */
+
+
+/*  */
+.add{
+   position: relative;
+   width: 100%;
+}
+.add .head_c{
+   padding-top: 0;
+}
+
+
+.add_c{
+   position: relative;
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: stretch;
+   flex-wrap: wrap;
+}
+.add_i{
+   position: relative;
+   width: calc(100% / 2 - 15px);
+   margin-bottom: 30px;
+}
+
+.add_b{
+   position: relative;
+   width: 100%;
+}
