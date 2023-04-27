@@ -16,8 +16,22 @@ $(document).ready(function() {
 
 
 	// на верх
-	$('html').on('click', '.clc_top', function(){$('html, body').animate({scrollTop:0},500)})
+	// $('html').on('click', '.clc_top', function(){
+	// 	$('html, body').animate({
+	// 		scrollTop: 0
+	// 	}, 500)
+	// })
 
+
+	// скрол
+	let scroll = $(window).scrollTop()
+	if (scroll > 400) $('.up_site').addClass('up_site_active')
+  	else $('.up_site').removeClass('up_site_active')
+	$(window).scroll(function() {
+		scroll = $(window).scrollTop()
+		if (scroll > 400) $('.up_site').addClass('up_site_active')
+  		else $('.up_site').removeClass('up_site_active')
+	})
 
 
 

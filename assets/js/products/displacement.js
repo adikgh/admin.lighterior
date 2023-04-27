@@ -131,37 +131,57 @@ $(document).ready(function() {
             search: $('.cashbox_search').val(),
             id: $('.cashbox_search').data('id'),
          }),
+         beforeSend: function(){ },
+         error: function(data){ },
          success: function(data){ 
             if (data == 'yes') location.reload();
             else if (data == 0) mess('Товар уже не осталось');
             else console.log(data);
          },
-         beforeSend: function(){ },
-         error: function(data){ }
       })
+
+      if ($(this).val() == '') {
+         $('.so_kk').addClass('dsp_n')
+      } else {
+			$('.so_kk').removeClass('dsp_n')
+			$.ajax({
+				url: "/products/displacement/search.php?product_search",
+				type: "POST",
+				dataType: "html",
+				data: ({ result: $('.cashbox_search').val(), }),
+            beforeSend: function(){ },
+				error: function(data){ },
+				success: function(data){
+					$('.so_kk').html(data)
+					$('.lazy_img').lazy({effect:"fadeIn", effectTime:300, threshold:0})
+					// console.log(data)
+				},
+			})
+		}
    })
 
 
 	// cashbox_add
-	$('.cashbox_add').on('click', function () {
+   $('html').on('click', '.cashbox_add', function () {
       btn = $(this)
       $.ajax({
-         url: "/retail/cashbox/get.php?cashbox_add",
+         url: "/products/displacement/get.php?cashbox_add",
          type: "POST",
          dataType: "html",
          data: ({
-            id: btn.data('id'),
-            item_id: btn.data('item-id'),
-            oid: btn.data('oid'),
+            id: btn.attr('data-id'),
+            oid: btn.parent('.so_kk').attr('data-id'),
          }),
+         beforeSend: function(){ },
+         error: function(data){ },
          success: function(data){ 
             if (data == 'yes') location.reload();
             else if (data == 0) mess('Товар уже не осталось');
             else console.log(data);
+            console.log('ss');
          },
-         beforeSend: function(){ },
-         error: function(data){ }
       })
+
 	})
 
 

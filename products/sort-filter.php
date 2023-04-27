@@ -9,6 +9,7 @@
             </div>
          </div>
          <div class="ucours_tm">
+            <div class="ucours_tmas"></div>
             <div class="ucours_tmi <?=($filter==0?'ucours_tm_act':'')?>">
                <i class="fal fa-sort ucours_tmic"></i>
                <span>Сортировка</span>
@@ -30,6 +31,7 @@
             </div>
          </div>
          <div class="ucours_tm">
+            <div class="ucours_tmas"></div>
             <div class="ucours_tmi <?=($filter==0?'ucours_tm_act':'')?>">
                <i class="fal fa-inventory ucours_tmic"></i>
                <span>Категория</span>
@@ -46,6 +48,7 @@
             </div>
          </div>
          <div class="ucours_tm">
+            <div class="ucours_tmas"></div>
             <div class="ucours_tmi <?=($filter==0?'ucours_tm_act':'')?>">
                <i class="fal fa-copyright ucours_tmic"></i>
                <span>Бренд</span>
@@ -70,6 +73,7 @@
             </div>
          <? else: ?>
             <div class="ucours_tm">
+               <div class="ucours_tmas"></div>
                <div class="ucours_tmi <?=($filter==0?'ucours_tm_act':'')?>">
                   <i class="fal fa-warehouse-alt ucours_tmic"></i>
                   <span>Склад</span>

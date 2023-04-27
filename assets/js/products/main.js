@@ -68,7 +68,28 @@ $(document).ready(function() {
 			})
 		}
 	})
-	
+
+
+	// 
+	$('html').on('click', '.form_prd_online', function() {
+		btn = $(this)
+		$.ajax({
+			url: "/products/get.php?form_prd_online",
+			type: "POST",
+			dataType: "html",
+			data: ({
+				id: btn.attr('data-id'),
+				val: btn.siblings('input').attr('data-val'),
+			}),
+			beforeSend: function(){ },
+			error: function(data){ },
+			success: function(data){
+				if (data == 'yes') mess('Успешно')
+				else mess('Ошибка!'); console.log(data);
+			},
+		})
+	})
+
 
 	// delete
 	$('html').on('click', '.pr_btn_delete', function() {
@@ -100,7 +121,7 @@ $(document).ready(function() {
 			$.ajax({
 				// async: true,
 				// url: "https://cors-anywhere.herokuapp.com/https://lighterior.kz/admin/file.php?product_img_add",
-				url: "https://lighterior.kz/admin/file.php?product_img_add",
+				url: "/products/item/get.php?product_img_add",
 				type: "POST",
 				crossDomain: true,
 				// method: "POST",
@@ -112,7 +133,7 @@ $(document).ready(function() {
 				data: formData,
 				success: function(msg){
 					if (msg.error == '') {
-						tfile_n = 'url(https://lighterior.kz/assets/uploads/products/'+msg.file+')'
+						tfile_n = 'url(/assets/uploads/products/'+msg.file+')'
 						tfile.attr('data-val', msg.file)
 						tfile.siblings('.form_im_img').addClass('form_im_img2')
 						tfile.siblings('.form_im_img').css('background-image', tfile_n)

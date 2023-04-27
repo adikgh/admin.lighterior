@@ -167,3 +167,27 @@
          </div>
       </div>
    </div>
+
+
+   <!-- imgs b -->
+   <div class="pop_bl pop_bl2 imgs_add_block">
+      <div class="pop_bl_a imgs_add_back"></div>
+      <div class="pop_bl_c">
+         <div class="head_c">
+            <h4>Добавить фото товара</h4>
+            <div class="btn btn_dd imgs_add_back"><i class="fal fa-times"></i></div>
+         </div>
+         <div class="pop_bl_cl lazy_c">
+            <div class="form_c">
+               <div class="form_head">Добавить изображение товара:</div>
+               <div class="uacc_ic">
+                  <div class="upl_logo upl_logo2">
+                     <input type="file" class="item_file2 file" multiple accept=".png, .jpeg, .jpg" data-id="<?=$product_id?>" data-item-id="">
+                     <div class="upl_logo_c item_ava_clc2">Добавить фото</div>
+                  </div>
+                  <div class="upl_lv lazy_c"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>

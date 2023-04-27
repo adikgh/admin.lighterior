@@ -591,6 +591,9 @@ $(document).ready(function() {
 			$(this).parent().addClass("ucours_tm_act");
 		} else $('.ucours_tmi').parent().removeClass("ucours_tm_act");
 	})
+	$('html').on('click', '.ucours_tmas', function() {
+		$('.ucours_tmi').parent().removeClass("ucours_tm_act");
+	})
 
 
 

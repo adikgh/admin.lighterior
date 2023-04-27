@@ -1,4 +1,4 @@
-<?php include "config/core.php";
+<? include "config/core.php";
 
 	// 
 	if (!$user_id) header('location: /sign.php');

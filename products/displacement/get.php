@@ -53,7 +53,7 @@
 		$search = strip_tags($_POST['search']);
 		$oid = strip_tags($_POST['id']);
 
-      $pitem = db::query("select * from product_item where (barcode = '$search' and barcode is not null) or article = '$search' limit 1");
+      $pitem = db::query("select * from product_item where (barcode = '$search' and barcode is not null) or (article = '$search' and article is not null) limit 1");
       if (mysqli_num_rows($pitem)) {
          $pitem_d = mysqli_fetch_assoc($pitem);
          $pitem_id = $pitem_d['id'];
@@ -76,20 +76,23 @@
 
    // 
 	if(isset($_GET['cashbox_add'])) {
-      $pid = strip_tags($_POST['id']);
+      $pitem_id = strip_tags($_POST['id']);
 		$oid = strip_tags($_POST['oid']);
       
-      $pitem_id = strip_tags($_POST['item_id']);
-      $pitem_d = product::pr_item($pitem_id);
-      $price = $pitem_d['price'];
+      $pitem_d = product::product_item($pitem_id);
+      $product_d = product::product($pitem_d['product_id']);
+      $product_id = $pitem_d['product_id'];
 
-      if ($pitem_d['quantity'] > 0) {
-         $retailop = db::query("select * from retail_orders_products where order_id = '$oid' and product_id = '$pid' and product_item_id = '$pitem_id'");
-         if (mysqli_num_rows($retailop)) $upd = db::query("UPDATE `retail_orders_products` SET quantity = quantity + 1 WHERE `order_id`='$oid' and `product_id`='$pid' and product_item_id = '$pitem_id'");
-         else $ins = db::query("INSERT INTO `retail_orders_products`(`order_id`, `product_id`, `product_item_id`, `quantity`, `price`) VALUES ('$oid', '$pid', '$pitem_id', 1, $price)");
-         $upd2 = db::query("UPDATE `product_item` SET quantity = quantity - 1 WHERE id = '$pitem_id'");
+      $view = db::query("select * from product_item_quantity where item_id = '$pitem_id'");
+      if (mysqli_num_rows($view)) {
+         while ($view_d = mysqli_fetch_assoc($view)) {
+            $view_id = $view_d['id'];
+            $disp = db::query("select * from pr_warehouses_displacement_product where displacement_id = '$oid' and view_id = '$view_id'");
+            if (!mysqli_num_rows($disp)) $ins = db::query("INSERT INTO `pr_warehouses_displacement_product`(`displacement_id`, `product_id`, `item_id`, `view_id`, `quantity`) VALUES ('$oid', '$product_id', '$pitem_id', '$view_id', 1)");
+            // else $upd = db::query("UPDATE `pr_warehouses_displacement_product` SET quantity = quantity + 1 WHERE displacement_id = '$oid' and view_id = '$view_id'");
+         }
          if ($upd || $ins) echo 'yes';
-      } else echo 0;
+      }
 
       exit();
 	}

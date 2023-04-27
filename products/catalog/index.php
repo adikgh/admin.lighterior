@@ -1,4 +1,4 @@
-<?php include "../../../config/acore.php";
+<? include "../../../config/acore.php";
 
 	// 
 	if (!$user_id) header('location: /admin/');

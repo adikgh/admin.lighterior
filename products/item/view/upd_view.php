@@ -65,6 +65,13 @@
                <div class="form_im_img pitem_img_upd_btn <?=($pitem_d['img']?'form_im_img2':'')?>" data-txt="Обновить изображение" style="background-image: url('/assets/uploads/products/<?=$pitem_d['img']?>')">Выберите с устройства</div>
             </div>
          </div>
+         <div class="form_c">
+            <div class="form_head">Добавить второй изображение:</div>
+            <div class="form_im">
+               <input type="file" class="file dsp_n product_img pitem_img_upd2" accept=".png, .jpeg, .jpg">
+               <div class="form_im_img pitem_img_upd_btn2 <?=($pitem_d['img']?'form_im_img2':'')?>" data-txt="Обновить изображение" style="background-image: url('/assets/uploads/products/<?=$pitem_d['img_room']?>')">Выберите с устройства</div>
+            </div>
+         </div>
 
          <div class="form_c">
             <div class="form_im">

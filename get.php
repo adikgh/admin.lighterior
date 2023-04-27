@@ -1,45 +1,23 @@
-<?php include "config/core.php";
+<? include "config/core.php";
 
 	// sign in phone
 	if(isset($_GET['phone'])) {
 		$phone = strip_tags($_POST['phone']);
 		$password = strip_tags($_POST['password']);
-		$user = db::query("SELECT * FROM user WHERE phone = '$phone'");
+		$user = db::query("SELECT * FROM user WHERE phone = '$phone' and rights = 1");
 		if (mysqli_num_rows($user)) {
 			$user_d = mysqli_fetch_assoc($user);
-			if ($password == $user_d['password']) {
+			if (md5($password) == $user_d['password2']) {
 				$_SESSION['uph'] = $phone;
-				setcookie('uph', $phone, time() + 3600*24*30);
-				$_SESSION['ups'] = $password;
-				setcookie('ups', $password, time() + 3600*24*30);
+				setcookie('uph', $phone, time() + 3600*24*30, '/');
+				$_SESSION['ups'] = $user_d['password2'];
+				setcookie('ups', $user_d['password2'], time() + 3600*24*30, '/');
 				echo 'yes';
 			} else if ($user_d['password'] == null) echo 'code';
 			else echo 'password';
 		} else echo 'phone';
 		exit();
 	}
-
-	// sign in mail
-	if(isset($_GET['smail'])) {
-		$mail = strip_tags($_POST['smail']);
-		$password = strip_tags($_POST['password']);
-		$user = db::query("SELECT * FROM user WHERE mail = '$mail'");
-		if (mysqli_num_rows($user)) {
-			$user_d = mysqli_fetch_assoc($user);
-			if ($password == $user_d['password']) {
-				$_SESSION['upm'] = $mail;
-				setcookie('upm', $mail, time() + 3600*24*30);
-				$_SESSION['ups'] = $password;
-				setcookie('ups', $password, time() + 3600*24*30);
-				echo 'yes';
-			} else if ($user_d['password'] == null) echo 'code';
-			else echo 'password';
-		} else echo 'mail';
-		exit();
-	}
-
-
-
 
 	// sign in
 	// if(isset($_GET['password'])) {

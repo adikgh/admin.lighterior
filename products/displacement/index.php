@@ -73,6 +73,7 @@
 					<i class="fal fa-search form_icon"></i>
 				</div>
 				<div class="uc_usb"><div class="btn btn_cl">Добавить из списка</div></div>
+				<div class="so_kk dsp_n" data-id="<?=$cashbox_id?>"></div>
 			</div>
 			<div class="uc_uh">
 				<div class="uc_uh2">
@@ -97,7 +98,7 @@
 								<div class="uc_uil">
 									<div class="uc_ui_number"><?=$number?></div>
 									<div class="uc_uiln">
-										<div class="uc_ui_img lazy_img" data-src="https://lighterior.kz/assets/uploads/products/<?=$pitem_d['img']?>"><?=($pitem_d['img']!=null?'':'<i class="fal fa-user"></i>')?></div>
+										<div class="uc_ui_img lazy_img" data-src="/assets/uploads/products/<?=$pitem_d['img']?>"><?=($pitem_d['img']!=null?'':'<i class="fal fa-user"></i>')?></div>
 										<div class="uc_uinu">
 											<div class="uc_ui_name"><?=$pitem_d['article']?> - <?=(product::pr_warehouses($view_d['warehouses_id']))['name']?></div>
 											<div class="uc_ui_cont">

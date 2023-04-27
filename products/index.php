@@ -13,8 +13,7 @@
 	} elseif ($_GET['brand']) {
 		$brand_id = $_GET['brand'];
 		$product_all = db::query("select * from product where brand_id = '$brand_id' and arh = 0");
-	}
-	else $product_all = db::query("select * from product where arh = 0");
+	} else $product_all = db::query("select * from product where arh = 0");
 	$page_result = mysqli_num_rows($product_all);
 
 	// page number
@@ -58,68 +57,88 @@
                   <i class="fal fa-search form_icon"></i>
                </div>
 				</div>
-				<div class="uc_uh">
-					<div class="uc_uh2">
-						<div class="uc_uh_number">#</div>
-						<div class="uc_uh_name">Наименование</div>
-						<div class="uc_uh_other">Артикул</div>
-						<div class="uc_uh_other">Склад</div>
-						<div class="uc_uh_other">Цена продажи</div>
-						<div class="uc_uh_other">Количество</div>
-					</div>
-					<div class="uc_uh_cn"></div>
-				</div>
-				<div class="uc_u2q uc_uc">
-					<? while ($pr_d = mysqli_fetch_assoc($product)): ?>
-						<? $number++; ?>
 
-						<div class="uc_ui uc_ui2">
-							<div class="uc_uil">
-								<div class="uc_ui_number"><?=$number?></div>
-								<a class="uc_uiln" href="/products/item/?id=<?=$pr_d['id']?>">
-									<div class="uc_ui_img lazy_img" data-src="https://lighterior.kz/assets/uploads/products/<?=product::product_img($pr_d['id'])?>"><?=(product::product_img($pr_d['id'])!=null?'':'<i class="fal fa-box"></i>')?></div>
-									<div class="uc_uinu">
-										<div class="uc_ui_name"><?=$pr_d['name_ru']?></div>
-										<? if ($pr_d['catalog_id'] || $pr_d['brand_id']): ?>
-											<div class="uc_ui_cont">
-												<? if ($pr_d['catalog_id']): ?> <div><?=product::pr_catalog_name($pr_d['catalog_id'], $lang)?></div> <? endif ?>
-												<? if ($pr_d['brand_id']): ?> <div><?=(product::pr_brand($pr_d['brand_id']))['name']?></div> <? endif ?>
+				<div class="tscroll">
+					<table class="uc_u2q uc_uc">
+						<thead class="">
+							<tr class="thead">
+								<td class="td_number">#</td>
+								<td class="uc_ui_right">Статус</td>
+								<td class="td_img">Фото</td>
+								<td class="td_br"></td>
+								<td class="td_name">Наименование</td>
+								<td class="td_other">Артикул</td>
+								<td class="td_other">Категория</td>
+								<td class="td_other">Склад</td>
+								<td class="td_other">Цена продажи</td>
+								<td class="td_other">Количество</td>
+								<td class="uc_uh_cn"></td>
+							</tr>
+						</thead>
+						<tbody class="tbody">
+							<? while ($pr_d = mysqli_fetch_assoc($product)): ?>
+								<? $number++; ?>
+								
+								<tr class="uc_ui uc_ui2">
+									<td class="td_number"><div class="uc_ui_number"><?=$number?></div></td>
+									<td class="uc_ui_right">
+										<div class="form_im form_im_toggle">
+											<input type="checkbox" class="info_inp" data-val="<?=($pr_d['sale_online']==1?1:0)?>">
+											<div class="form_im_toggle_btn <?=($pr_d['sale_online']==1?'form_im_toggle_act':'')?> form_prd_online" data-id="<?=$pr_d['id']?>"></div>
+										</div>
+									</td>
+									<td class="td_img">
+										<div class="uc_ui_img lazy_img" data-src="/assets/uploads/products/<?=product::product_img($pr_d['id'])?>">
+											<? if (product::product_img($pr_d['id']) == null): ?> <i class="fal fa-box"></i> <? endif ?>
+										</div>
+									</td>
+									<td class="td_br"></td>
+									<td class="td_name">
+										<a class="" href="/products/item/?id=<?=$pr_d['id']?>">
+											<div class="uc_ui_name"><?=$pr_d['name_ru']?></div>
+										</a>
+									</td>
+									<td class="td_other">
+										<div class="uc_ui_cont">
+											<div><?=product::product_article($pr_d['id'])?></div>
+											<? if ($pr_d['brand_id'] && $gh): ?> <div><?=(product::pr_brand($pr_d['brand_id']))['name']?></div> <? endif ?>
+										</div>
+									</td>
+									<td class="td_other"><div class="uc_uin_other"><? if ($pr_d['catalog_id']): ?> <div><?=product::pr_catalog_name($pr_d['catalog_id'], $lang)?></div> <? endif ?></div></td>
+									<td class="td_other"><div class="uc_uin_other"><?=product::product_warehouses($pr_d['id'])?></div></td>
+									<td class="td_other"><div class="uc_uin_other"><?=(product::product_price($pr_d['id'])==0?'<m>Цена не указана</m>':product::product_price($pr_d['id']).' тг')?></div></td>
+									<td class="td_other"><div class="uc_uin_other " product_quantity_add_pop data-id="<?=$pr_d['id']?>"><?=product::product_quantity($pr_d['id'])?> шт</div></td>
+									<td class="">
+										<div class="uc_uib">
+											<div class="uc_uibo"><i class="fal fa-ellipsis-v"></i></div>
+											<div class="menu_c uc_uibs">
+												<a class="menu_ci" target="_blank" href="/products/item/?id=<?=$pr_d['id']?>">
+													<div class="menu_cin"><i class="fal fa-external-link"></i></div>
+													<div class="menu_cih">Открыть товар</div>
+												</a>
+												<div class="menu_ci product2_add_pop" data-id="<?=$pr_d['id']?>">
+													<div class="menu_cin"><i class="fal fa-clone"></i></div>
+													<div class="menu_cih">Дублировать товар</div>
+												</div>
+												<!-- <div class="menu_ci " data-id="<?=$pr_d['id']?>">
+													<div class="menu_cin"><i class="fal fa-handshake"></i></div>
+													<div class="menu_cih">Выставить на продажу</div>
+												</div> -->
+												<!-- <div class="menu_ci " data-id="<?=$pr_d['id']?>">
+													<div class="menu_cin"><i class="fal fa-archive"></i></div>
+													<div class="menu_cih">Архивировать товар</div>
+												</div> -->
+												<div class="menu_ci uc_uib_del pr_btn_delete" data-title2="Удалить товар" data-id="<?=$pr_d['id']?>">
+													<div class="menu_cin"><i class="fal fa-trash-alt"></i></div>
+													<div class="menu_cih">Удалить товар</div>
+												</div>
 											</div>
-										<? endif ?>
-									</div>
-								</a>
-								<div class="uc_uin_other"><?=product::product_article($pr_d['id'])?></div>
-								<div class="uc_uin_other"><?=product::product_warehouses($pr_d['id'])?></div>
-								<div class="uc_uin_other"><?=(product::product_price($pr_d['id'])==0?'<m>Цена не указана</m>':product::product_price($pr_d['id']).' тг')?></div>
-								<div class="uc_uin_other " product_quantity_add_pop data-id="<?=$pr_d['id']?>"><?=product::product_quantity($pr_d['id'])?> шт</div>
-							</div>
-							<div class="uc_uib">
-								<div class="uc_uibo"><i class="fal fa-ellipsis-v"></i></div>
-								<div class="menu_c uc_uibs">
-									<a class="menu_ci" target="_blank" href="/products/item/?id=<?=$pr_d['id']?>">
-										<div class="menu_cin"><i class="fal fa-external-link"></i></div>
-										<div class="menu_cih">Открыть товар</div>
-									</a>
-									<div class="menu_ci product2_add_pop" data-id="<?=$pr_d['id']?>">
-										<div class="menu_cin"><i class="fal fa-clone"></i></div>
-										<div class="menu_cih">Дублировать товар</div>
-									</div>
-									<!-- <div class="menu_ci " data-id="<?=$pr_d['id']?>">
-										<div class="menu_cin"><i class="fal fa-handshake"></i></div>
-										<div class="menu_cih">Выставить на продажу</div>
-									</div> -->
-									<!-- <div class="menu_ci " data-id="<?=$pr_d['id']?>">
-										<div class="menu_cin"><i class="fal fa-archive"></i></div>
-										<div class="menu_cih">Архивировать товар</div>
-									</div> -->
-									<div class="menu_ci uc_uib_del pr_btn_delete" data-title2="Удалить товар" data-id="<?=$pr_d['id']?>">
-										<div class="menu_cin"><i class="fal fa-trash-alt"></i></div>
-										<div class="menu_cih">Удалить товар</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					<? endwhile ?>
+										</div>
+									</td>
+								</tr>
+							<? endwhile ?>
+						</tbody>
+					</table>
 				</div>
 				<div class="uc_u2qm  uc_uc dsp_n"></div>
 			</div>
@@ -144,12 +163,10 @@
 				</div>
 			<? endif ?>
 
-		<? else: ?>
-			<div class="ds_nr"><i class="fal fa-ghost"></i><p>НЕТ</p></div>
-		<? endif ?>
+		<? else: ?> <div class="ds_nr"><i class="fal fa-ghost"></i><p>НЕТ</p></div> <? endif ?>
 
 	</div>
 
 <? include "../block/footer.php"; ?>
 
-<? include "pop_add.php"; ?>
+	<? include "pop_add.php"; ?>

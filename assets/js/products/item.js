@@ -154,7 +154,10 @@ $(document).ready(function() {
 		$('#html').removeClass('ovr_h');
 		$('.pitem_upd_block .pop_bl_cl').html('');
 	})
+
 	$('html').on('click', '.pitem_img_upd_btn', function(){ $(this).siblings('.pitem_img_upd').click() })
+	$('html').on('click', '.pitem_img_upd_btn2', function(){ $(this).siblings('.pitem_img_upd2').click() })
+
 	$('html').on('click', '.pitem_upd', function() {
 		if ($('.pitem_article_upd').val().length >= $('.pitem_article_upd').data('length') || $('.pitem_price_upd').val().length >= $('.pitem_price_upd').data('length')) {
 			if ($('.pitem_article_upd').val().length >= $('.pitem_article_upd').data('length')) mess('Введите свой данный')
@@ -169,7 +172,8 @@ $(document).ready(function() {
 					quantity: $('.pitem_quantity_upd').attr('data-val'), price: $('.pitem_price_upd').attr('data-val'),
 					purchase_price: $('.pitem_purchase_price_upd').attr('data-val'), discount_price: $('.pitem_discount_price_upd').attr('data-val'),
 					color: $('.pitem_color_upd').attr('data-val'), size: $('.pitem_size_upd').attr('data-val'),
-					img: $('.pitem_img_upd').attr('data-val'), id: $('.pitem_upd').data('id'),
+					img: $('.pitem_img_upd').attr('data-val'), img2: $('.pitem_img_upd2').attr('data-val'),
+					id: $('.pitem_upd').data('id'),
 				}),
 				success: function(data){
 					if (data == 'yes') {
@@ -182,6 +186,8 @@ $(document).ready(function() {
 			})
 		}
 	})
+
+
 
 	// item price update
 	$('html').on('input', '.item_upd_pr', function () {
@@ -385,6 +391,130 @@ $(document).ready(function() {
 	// 		error: function(data){ }
 	// 	})
 	// })
+
+
+
+
+
+
+
+
+
+
+
+
+	// 
+	$('html').on('click', '.upl_logo_img_del', function() {
+		btn = $(this)
+		$.ajax({
+			url: "/products/item/get.php?del_imgs",
+			type: "POST",
+			dataType: "html",
+			data: ({ id: btn.attr('data-id'), }),
+			beforeSend: function(){ },
+			error: function(data){ },
+			success: function(data){
+				mess('Өшірілді')
+				btn.parent('.upl_logo').remove()
+			},
+		})
+	})
+
+
+	// 
+	$('html').on('click', '.imgs_updq_pop', function() {
+		$('.imgs_add_block').addClass('pop_bl_act');
+		$('#html').addClass('ovr_h');
+		$('.item_file2').attr('data-item-id', $(this).attr('data-id'))
+		btn = $(this)
+		$.ajax({
+			url: "/products/item/imgs_item.php?pitem_d",
+			type: "POST",
+			dataType: "html",
+			data: ({ id: btn.attr('data-id'), }),
+			beforeSend: function(){ },
+			error: function(data){ },
+			success: function(data){
+				$('.imgs_add_block .upl_lv').html(data);
+				// $('.lazy_img').lazy({effect:"fadeIn", effectTime:300, threshold:0})
+			},
+		})
+	})
+	$('html').on('click', '.imgs_add_back', function() {
+		$('.imgs_add_block').removeClass('pop_bl_act');
+		$('#html').removeClass('ovr_h');
+		// $('.imgs_add_block .pop_bl_cl').html('');
+		if ($('.imgs_add_block').attr('data-load') == 1) location.reload();
+	})
+
+	$('html').on('input', '.view_updq_qn', function () {
+		btn = $(this)
+		$.ajax({
+			url: "/products/item/view/get.php?pitem_qn",
+			type: "POST",
+			dataType: "html",
+			data: ({ 
+				quantity: btn.attr('data-val'),
+				id: btn.data('id'),
+			}),
+			beforeSend: function(){ },
+			error: function(data){ },
+			success: function(data){
+				$('.pitem_updq_block').attr('data-load', 1)
+				console.log(data);
+				console.log(btn.attr('data-val'));
+			},
+		})
+	})
+
+
+
+
+	$('.item_ava_clc2').click(function(){ $(this).siblings('.item_file2').click() })
+	$(".item_file2").change(function(){
+		tfile = $(this)
+		if (window.FormData === undefined) mess('В вашем браузере FormData не поддерживается')
+		else {
+
+			$.ajax({
+				url: "/products/item/get.php?add_sess",
+				type: "POST",
+				dataType: "html",
+				data: ({ 
+					id: tfile.data('id'),
+					item_id: tfile.data('item-id'),
+				}),
+				beforeSend: function(){ },
+				error: function(data){ },
+				success: function(data){
+					console.log(data);
+				},
+			})
+
+			var formData = new FormData();
+			$.each(tfile[0].files, function(key, input){ formData.append('file[]', input); });
+			$.ajax({
+				type: "POST",
+				url: "/products/item/get.php?add_item_photo2",
+				// crossDomain: true,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: 'json',
+				data: formData,
+				success: function(msg){
+					if (msg.error == '') {
+						$.each(msg.file, function(index, value){
+							tfile_n = 'url(/assets/uploads/products/'+value+')'
+							$('.upl_lv').prepend('<div class="upl_logo " data-val="' + value + '"><div class="upl_logo_img lazy_img upl_logo_img_del" style="background-image:' + tfile_n + '"></div></div>')
+						})
+					} else mess(msg.error)
+				},
+				beforeSend: function(){ },
+				error: function(msg){ },
+			});
+		}
+	});
 
 
 

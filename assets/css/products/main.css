@@ -50,3 +50,45 @@
 
 
 /*  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
+
+
+.upl_logo_img_del::after{
+	content: 'Өшіру';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--wh7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: .3s;
+	opacity: 0;
+}
+.upl_logo_img_del:hover::after{
+	opacity: 1;
+}

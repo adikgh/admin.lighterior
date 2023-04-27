@@ -1,4 +1,4 @@
-<?php include "../../config/core.php";
+<? include "../../config/core.php";
 
 	// 
 	if (!$user_id) header('location: /');
@@ -71,9 +71,7 @@
 				</div>
 			</div>
 
-		<? else: ?>
-			<div class="ds_nr"><i class="fal fa-ghost"></i><p>НЕТ</p></div>
-		<? endif ?>
+		<? else: ?> <div class="ds_nr"><i class="fal fa-ghost"></i><p>НЕТ</p></div> <? endif ?>
 
 	</div>
 

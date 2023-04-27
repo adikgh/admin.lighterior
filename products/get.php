@@ -118,12 +118,24 @@
 	}
    
    // product arh
+	if(isset($_GET['form_prd_online'])) {
+		$id = strip_tags($_POST['id']);
+		$val = strip_tags($_POST['val']);
+		$upd = db::query("UPDATE `product` SET sale_online = '$val' WHERE id = '$id'");
+
+      if ($upd) echo 'yes'; else echo 'error';
+      exit();
+	}
+
+
+   // product arh
 	if(isset($_GET['product_delete'])) {
 		$id = strip_tags($_POST['id']);
 
       // $upd = db::query("DELETE FROM `product_item_quantity` WHERE product_id = '$id'");
       // $upd = db::query("DELETE FROM `product_item` WHERE product_id = '$id'");
 		$upd = db::query("UPDATE `product` SET arh = 1 WHERE id = '$id'");
+		$upd_item = db::query("UPDATE `product_item` SET arh = 1 WHERE product_id = '$id'");
 
       if ($upd) echo 'yes'; else echo 'error';
       exit();

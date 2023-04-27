@@ -77,7 +77,7 @@
 							<div class="uc_uil">
 								<div class="uc_ui_number"><?=$number?></div>
 								<a class="uc_uiln" href="/products/item/?id=<?=$pr_d['id']?>">
-									<div class="uc_ui_img lazy_img" data-src="https://lighterior.kz/assets/uploads/products/<?=product::product_img($pr_d['id'])?>"><?=(product::product_img($pr_d['id'])!=null?'':'<i class="fal fa-box"></i>')?></div>
+									<div class="uc_ui_img lazy_img" data-src="/assets/uploads/products/<?=product::product_img($pr_d['id'])?>"><?=(product::product_img($pr_d['id'])!=null?'':'<i class="fal fa-box"></i>')?></div>
 									<div class="uc_uinu">
 										<div class="uc_ui_name"><?=$pr_d['name_ru']?></div>
 										<? if ($pr_d['catalog_id'] || $pr_d['brand_id']): ?>

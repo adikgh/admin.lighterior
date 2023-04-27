@@ -1,6 +1,9 @@
 <!--  -->
 <div class="bl_mess"><div class="bl_mess_sam"></div></div>
 
+<a href="#top" class="up_site" ><i class="fal fa-angle-up"></i></a>
+<!-- <div class="up_site clc_top" ><i class="fal fa-angle-up"></i></div> -->
+
 <!--  -->
 <div class="mp_dspn">
    <div class="ds_nr"><i class="fal fa-ghost"></i><p>Мобильный дизайн <br> в разработке</p></div>

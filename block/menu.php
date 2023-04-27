@@ -1,5 +1,5 @@
 <? if ($site_set['header'] == true): ?>
-	<div class="aheader <?=($site_set['mheader']!='false'?'':'mheader_none')?>">
+	<div class="aheader <?=($site_set['mheader']!='false'?'':'mheader_none')?>" id="top">
 		<div class="bl_c">
 			<div class="aheader_c">
 				<a class="alogo" href="/">Lighterior Admin</a>

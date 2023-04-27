@@ -1,4 +1,4 @@
-<?php include "../config/core.php";
+<? include "../config/core.php";
 
    // product_add 
 	if(isset($_GET['staff_add'])) {

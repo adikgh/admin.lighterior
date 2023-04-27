@@ -4,7 +4,7 @@
    <? if (isset($_GET['product_search'])): ?>
 		<? $search = strip_tags($_POST['result']); ?>
 
-         <? $item = db::query("select *, GROUP_CONCAT(product_id) from product_item where (article like '%$search%') or (barcode like '%$search%') GROUP BY product_id HAVING COUNT(product_id) > 1 order by ins_dt desc limit 50"); ?>
+         <? $item = db::query("select *, GROUP_CONCAT(product_id) from product_item where arh = 0 and (article like '%$search%') or (barcode like '%$search%') GROUP BY product_id HAVING COUNT(product_id) > 1 order by ins_dt desc limit 50"); ?>
          <? if (mysqli_num_rows($item)): ?>
 
             <? while ($pr_d = mysqli_fetch_assoc($item)): ?>
@@ -15,7 +15,7 @@
                   <div class="uc_uil">
                      <div class="uc_ui_number"><?=$number?></div>
                      <a class="uc_uiln" href="/products/item/?id=<?=$product_d['id']?>">
-                        <div class="uc_ui_img lazy_img" data-src="https://lighterior.kz/assets/uploads/products/<?=product::product_img($product_d['id'])?>"><?=(product::product_img($product_d['id'])!=null?'':'<i class="fal fa-box"></i>')?></div>
+                        <div class="uc_ui_img lazy_img" data-src="/assets/uploads/products/<?=product::product_img($product_d['id'])?>"><?=(product::product_img($product_d['id'])!=null?'':'<i class="fal fa-box"></i>')?></div>
                         <div class="uc_uinu">
                            <div class="uc_ui_name"><?=$product_d['name_ru']?></div>
                            <? if ($product_d['catalog_id'] || $product_d['brand_id']): ?>
@@ -57,7 +57,7 @@
 
          <? else: ?>
             
-            <? $product = db::query("select * from product where (name_ru like '%$search%') or (name_kz like '%$search%') order by ins_dt desc limit 50"); ?>
+            <? $product = db::query("select * from product where arh = 0 and (name_ru like '%$search%') or (name_kz like '%$search%') order by ins_dt desc limit 50"); ?>
             <? while ($pr_d = mysqli_fetch_assoc($product)): ?>
                <? $number++; ?>
    
@@ -65,7 +65,7 @@
                   <div class="uc_uil">
                      <div class="uc_ui_number"><?=$number?></div>
                      <a class="uc_uiln" href="/products/item/?id=<?=$pr_d['id']?>">
-                        <div class="uc_ui_img lazy_img" data-src="https://lighterior.kz/assets/uploads/products/<?=product::product_img($pr_d['id'])?>"><?=(product::product_img($pr_d['id'])!=null?'':'<i class="fal fa-box"></i>')?></div>
+                        <div class="uc_ui_img lazy_img" data-src="/assets/uploads/products/<?=product::product_img($pr_d['id'])?>"><?=(product::product_img($pr_d['id'])!=null?'':'<i class="fal fa-box"></i>')?></div>
                         <div class="uc_uinu">
                            <div class="uc_ui_name"><?=$pr_d['name_ru']?></div>
                            <? if ($pr_d['catalog_id'] || $pr_d['brand_id']): ?>
