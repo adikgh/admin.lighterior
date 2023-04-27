@@ -76,6 +76,7 @@
 			if (mysqli_num_rows($sql)) return mysqli_fetch_array($sql); else return 0;
 		}
 
+
 		// user management
 		// public static function user_management($id) {
 		// 	$sql = db::query("select * from user_management where user_id = '$id'");
@@ -102,7 +103,11 @@
 		// }
 
 
-
+		// 
+		public static function user_designer($id) {
+			$sql = db::query("select * from user_designer where user_id = '$id'");
+			if (mysqli_num_rows($sql)) return mysqli_fetch_array($sql); else return 0;
+		}
 
 
 

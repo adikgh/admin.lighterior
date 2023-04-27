@@ -44,22 +44,22 @@ $(document).ready(function() {
 	$('.fr_number').mask('# ##0', {reverse: true});
 	$('.fr_number2').mask('#0', {reverse: true});
 	$('.fr_number3').mask('# ##0 шт', {reverse: true});
-	
+	// $('.fr_price').mask('# ##0 тг', {reverse: true});
 
 	// input
 	$('html').on('input', 'input[type*="text"], input[type*="password"]', function() {
 		$(this).attr('data-val', $(this).val())
 		if ($(this).attr('data-lenght') <= $(this).val().length) $(this).attr('data-sel', 1)
-		else $(this).attr('data-sel',0)
+		else $(this).attr('data-sel', 0)
 	});
 	$('html').on('input', 'input[type*="tel"]', function() {
 		var val = $(this).val().replace(/_/g, '').replace(/ /g, '').replace(/-/g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\+/g, '').replace(/тг/g, '').replace(/шт/g, '').replace(/\./g, '')
 		$(this).attr('data-val', val)
 		if ($(this).attr('data-lenght') <= val.length) $(this).attr('data-sel', 1)
-		else $(this).attr('data-sel',0)
+		else $(this).attr('data-sel', 0)
 	});
-	$('input[type*="url"]').on('input', function(){
-		val = $(this).val().replace('https://', '').replace('www.', '').replace('youtube.com/watch?v=', '').replace('youtu.be/', '').replace(/\&.*/, '')
+	$('html').on('input', 'input[type*="url"]', function(){
+		val = $(this).val().replace('https://', '').replace('www.', '').replace('youtube.com/watch?v=', '').replace('youtu.be/', '').replace('instagram.com/', '').replace('/', '').replace(/\&.*/, '')
 		$(this).attr('data-val', val)
 	})
 
