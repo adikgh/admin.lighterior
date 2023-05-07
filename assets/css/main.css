@@ -227,7 +227,7 @@
 	background: var(--wh);
 	display: none;
 }
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
 	.mp_dspn{display:flex}
 }
 
